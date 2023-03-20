@@ -64,9 +64,19 @@ app.post('/api/persons', (request, response) => {
       : 0
     return maxId + 1
   }
-  const person = request.body
-  person.id = generateId()
-  console.log(person)
+  const body = request.body
+  if (!body.name || !body.number) {
+    return response.status(400).json({
+      error: 'content missing'
+    })
+  }
+  const person = {
+    id: generateId(),
+    name: body.name,
+    number: body.number
+  }
+  persons = persons.concat(person)
+  console.log(persons)
   response.json(person)
 })
 
