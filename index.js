@@ -48,19 +48,7 @@ app.get('/api/persons/:id', (request, response) => {
 
 app.get('/info', (request, response) => {
   let dateObject = new Date()
-  // const options = {
-  //   weekday: "long",
-  //   year: "numeric",
-  //   month: "long",
-  //   day: "numeric",
-  //   hour: "numeric",
-  //   minute: "numeric",
-  //   second: "numeric",
-  //   timeZoneName: "long",
-  // }
-  // let currentTime = dateObject.toLocaleDateString("en-DK", options)
-  // console.log(currentTime + dateObject);
-  response.send(`${dateObject}`)
+  response.send(`Phonebook has info for ${persons.length} people<br/><br/>${dateObject}`)
 })
 
 app.delete('/api/persons/:id', (request, response) => {
