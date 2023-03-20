@@ -58,11 +58,10 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
-  const generateId = () => {
-    const maxId = persons.length > 0
-      ? Math.max(...persons.map(person => person.id))
-      : 0
-    return maxId + 1
+  const generateRandomId = (min, max) => {
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max -min) + min)
   }
   const body = request.body
   if (!body.name || !body.number) {
@@ -71,7 +70,7 @@ app.post('/api/persons', (request, response) => {
     })
   }
   const person = {
-    id: generateId(),
+    id: generateRandomId(0, 1000),
     name: body.name,
     number: body.number
   }
