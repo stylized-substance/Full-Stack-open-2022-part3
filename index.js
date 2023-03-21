@@ -3,7 +3,10 @@ const express = require('express')
 const app = express()
 const morgan = require('morgan')
 
-app.use(morgan('tiny'))
+// Create body token for morgan
+morgan.token('body', (req, res) => JSON.stringify(req.body))
+
+app.use(morgan(':method :url :status :response-time ms :body'))
 app.use(express.json())
 
 let persons = [
