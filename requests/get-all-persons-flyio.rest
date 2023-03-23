@@ -1,1 +1,1 @@
-GET https://phonebook-backend-flyio.fly.dev:8080/api/persons
+GET https://phonebook-backend-flyio.fly.dev/api/persons
