@@ -1,8 +1,10 @@
+require('dotenv').config()
 const { request, response } = require('express')
 const express = require('express')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
+const Person = require('.models/person')
 
 // Create body token for morgan
 morgan.token('body', (req, res) => JSON.stringify(req.body))
@@ -91,7 +93,7 @@ app.post('/api/persons', (request, response) => {
   response.json(person)
 })
 
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}`);
 })
