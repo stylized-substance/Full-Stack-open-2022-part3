@@ -55,15 +55,16 @@ app.get('/info', (request, response) => {
   response.send(`Phonebook has info for ${persons.length} people<br/><br/>${dateObject}`)
 })
 
-app.delete('/api/persons/:id', (request, response) => {
-  Person.findById(request.params.id)
-    .then(person => {
-      Person.deleteOne(request.params.id)
-      console.log(response.error)
+app.delete('/api/persons/:id', (request, response, next) => {
+  Person.findByIdAndDelete(request.params.id)
+    .then(result => {
       response.status(204).end()
+      console.log(response.json(response))
     })
+    .catch(error => next(error)
+    )
 })
-    
+
 
 app.post('/api/persons', (request, response) => {
   const body = request.body
