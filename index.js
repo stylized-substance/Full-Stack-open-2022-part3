@@ -9,10 +9,23 @@ const cors = require('cors')
 // Create body token for morgan
 morgan.token('body', (req, res) => JSON.stringify(req.body))
 
+// Define error handler middleware for malformatted MongoDB IDs
+
+const errorHandler = (error, request, response, next) => {
+  console.log(error.message);
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }
+
+  next(error)
+}
+
 app.use(morgan(':method :url :status :response-time ms :body'))
 app.use(express.json())
 app.use(cors())
 app.use(express.static('build'))
+app.use(errorHandler)
 
 app.get('/', (request, response) => {
   response.send('<h1>Hello world!</h1>')
@@ -25,7 +38,7 @@ app.get('/api/persons', (request, response) => {
     })
 })
 
-app.get('/api/persons/:id', (request, response) => {
+app.get('/api/persons/:id', (request, response, next) => {
   Person.findById(request.params.id)
     .then(person => {
       if (person) {
@@ -34,10 +47,8 @@ app.get('/api/persons/:id', (request, response) => {
         response.status(404).end()
       }
     })
-    .catch(error => {
-      console.log(error);
-      response.status(400).send({ error: 'malformatted id' })
-    })
+    .catch(error => errorHandler(error))
+    // .catch(error => next(error))
 })
 
 app.get('/info', (request, response) => {
