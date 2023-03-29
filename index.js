@@ -47,8 +47,7 @@ app.get('/api/persons/:id', (request, response, next) => {
         response.status(404).end()
       }
     })
-    .catch(error => errorHandler(error))
-    // .catch(error => next(error))
+    .catch(error => next(errorHandler))
 })
 
 app.get('/info', (request, response) => {
