@@ -1,10 +1,10 @@
 require('dotenv').config()
 const { request, response } = require('express')
 const express = require('express')
+const Person = require('./models/person')
 const app = express()
 const morgan = require('morgan')
 const cors = require('cors')
-const Person = require('./models/person')
 
 // Create body token for morgan
 morgan.token('body', (req, res) => JSON.stringify(req.body))
