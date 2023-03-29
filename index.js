@@ -51,8 +51,11 @@ app.get('/api/persons/:id', (request, response, next) => {
 })
 
 app.get('/info', (request, response) => {
-  let dateObject = new Date()
-  response.send(`Phonebook has info for ${persons.length} people<br/><br/>${dateObject}`)
+  let persons = Person.find({})
+    .then(searchResults => {
+      let dateObject = new Date()
+      response.send(`Phonebook has info for ${searchResults.length} people<br/><br/>${dateObject}`)
+    })
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
