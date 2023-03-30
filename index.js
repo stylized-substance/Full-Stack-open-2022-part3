@@ -64,7 +64,7 @@ app.delete('/api/persons/:id', (request, response, next) => {
       response.status(204).end()
       console.log(response.json(response))
     })
-    .catch(error => next(error)
+    .catch(error => next(errorHandler)
     )
 })
 
@@ -96,7 +96,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     .then(updatedPerson => {
       response.json(updatedPerson)
     })
-    .catch(error => next(error))
+    .catch(error => next(errorHandler))
 })
 
 const PORT = process.env.PORT
