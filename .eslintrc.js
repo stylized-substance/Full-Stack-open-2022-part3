@@ -18,7 +18,7 @@ module.exports = {
       'error', 'always',
     ],
     'arrow-spacing': [
-      'error', { before: true, after: true }
+      'error', { before: true, after: true },
     ],
     'no-console': 0,
     indent: [
