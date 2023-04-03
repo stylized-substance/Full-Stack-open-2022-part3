@@ -1,5 +1,5 @@
 # Full Stack open 2022
 
-Exercise submissions for part 3
+Submissions for exercises 3.1-3.22
 
-Backend runs at https://phonebook-backend-flyio.fly.dev/
+App runs at https://phonebook-backend-flyio.fly.dev/
